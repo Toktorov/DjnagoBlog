@@ -25,7 +25,7 @@ def update(request, id):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post.image = form.cleaned_data['image']
+            post.title = form.cleaned_data['title']
             post.description = form.cleaned_data['description']
             post.save()
             return redirect('index')
