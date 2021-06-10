@@ -19,3 +19,23 @@ def create(request):
         form.save()
         return redirect('index')
     return render(request, 'posts/create.html', {'form': form})
+
+def update(request, id):
+    post = Post.objects.get(id=id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post.image = form.cleaned_data['image']
+            post.description = form.cleaned_data['description']
+            post.save()
+            return redirect('index')
+    else:
+        form = PostForm()
+    return render(request, 'posts/update.html', {'form': form})
+
+def delete(request, id):
+    if request.method == 'POST':
+        post = Post.objects.get(id=id)
+        post.delete()
+        return redirect('index')
+    return render(request, 'posts/delete.html')
