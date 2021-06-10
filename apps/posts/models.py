@@ -11,3 +11,17 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+class PostImage(models.Model):
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='post_image'
+    )
+    image = models.ImageField(
+        upload_to='post',
+        verbose_name='Картинки'
+    )
+
+    def __str__(self):
+        return f"{self.id}"
+

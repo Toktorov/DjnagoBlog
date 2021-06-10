@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from apps.posts.models import Post
-from apps.posts.forms import PostForm
+from apps.posts.models import Post, PostImage
+from apps.posts.forms import PostForm, PostImageForm
 from django.forms import inlineformset_factory
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
