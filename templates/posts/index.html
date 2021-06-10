@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{% block content %}
+    {% for product in products %}
+    <div class="card" style="width: 20rem; margin-left: 5rem; margin-top: 2rem">
+        <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.description|truncatewords:40}}</p>
+            <a href="{% url 'detail' product.id %}" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
