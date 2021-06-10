@@ -5,7 +5,7 @@
         <div class="card-body">
             <h5 class="card-title">{{ post.title }}</h5>
             <p class="card-text">{{ post.description|truncatewords:40}}</p>
-            <a href="{% url 'detail' post.id %}" class="btn btn-primary">Go somewhere</a>
+            <a href="{% url 'detail' post.id %}" class="btn btn-primary">View</a>
         </div>
     </div>
     {% endfor %}
