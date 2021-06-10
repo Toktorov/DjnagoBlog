@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from apps.posts.models import Post, PostImage
-from apps.posts.forms import PostForm, PostImageForm
+from apps.posts.models import Post
+from apps.posts.forms import PostForm
 from django.forms import inlineformset_factory
 
 # Create your views here.
@@ -14,13 +14,8 @@ def detail(request, id):
 
 
 def create(request):
-    form = PostForm(request.POST or None)
-    PostImageFormSet = inlineformset_factory(Post, PostImage, form=PostImageForm, extra=1)
-    if request.method == 'POST':
-        if form.is_valid():
-            post = Post()
-            post.owner = request.user
-            post.description = form.cleaned_data['description']
-            post.save()
-            return redirect('index')
-    return render(request, 'posts/create.html', locals())
+    form = PostForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+    return render(request, 'posts/create.html', {'form': form})
