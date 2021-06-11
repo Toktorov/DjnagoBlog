@@ -3,10 +3,15 @@ from apps.posts.models import Post, PostImage
 from apps.posts.forms import PostForm, PostImageForm
 from django.forms import inlineformset_factory
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 # Create your views here.
 def index(request):
     posts = Post.objects.all()
+    if 'key_word' in request.GET:
+        key = request.GET.get('words')
+        posts = Post.objects.filter(Q(title__icontains=key) |
+                                    Q(description__icontains=key))
     return render(request, 'posts/index.html', {'posts': posts})
 
 def detail(request, id):
