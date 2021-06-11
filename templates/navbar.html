@@ -1,6 +1,7 @@
+{% load socialaccount %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" style="margin-left: +100px;" href="{% url 'index' %}">Blog</a>
+      <a class="navbar-brand" style="margin-left: +100px;" href="{% url 'index' %}">My Blog</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -12,20 +13,28 @@
           <li class="nav-item">
             <a class="nav-link" href='https://github.com/Toktorov/blog.git'>Project in GitHub</a>
           </li>
+          {% if user.is_authenticated %}
+                    <p>Welcome, {{ user.username }} !</p>
+                    <div>
+                        <a href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
+                    </div>
+                {% else %}
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Login</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'create' %}">Sign Up</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'signup' %}">Sign Up</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Login with Google</a>
+            <a class="nav-link active" aria-current="page" href="{% provider_login_url 'google' %}">Login with Google</a>
           </li>
+                {% endif %}
             <form class="d-flex" style="margin-left: +50px;">
               <input class="form-control me-2" name = "words" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-success" name = "key_word" type="submit">Search</button>
             </form>
         </ul>
+        <p>Welcome, {{ user.username }} !</p>
       </div>
     </div>
   </nav>
