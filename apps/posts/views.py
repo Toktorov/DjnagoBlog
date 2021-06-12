@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from apps.posts.models import Post, PostImage, Like
 from apps.posts.forms import PostForm, PostImageForm
+from apps.comments.models import Comment
 from django.forms import inlineformset_factory
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -22,6 +23,14 @@ def detail(request, id=id):
             like.delete()
         except:
             Like.objects.create(user=request.user, post=posts)
+
+    if 'comment' in request.POST:
+            try:
+                text = request.POST.get('text')
+                comment_obj = Comment.objects.create(user=request.user, post=posts, text=text)
+                return redirect('detail_data', posts.id)
+            except:
+                print("Error")
     return render(request, 'posts/detail.html', {"posts": posts})
 
 def create(request):
