@@ -15,7 +15,7 @@
                       <a class="nav-link active" aria-current="page" href="{% url 'create' %}">Create</a>     
                     </div>
                     <div>                       
-                        <a href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
+                        <a style="margin-left: +30px;" href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
                     </div>
                 {% else %}
           <li class="nav-item">
@@ -35,7 +35,7 @@
         </ul>
           {% if user.is_authenticated %}
           <div>
-            <a style = "color: white; margin-left: +250px;">Hi, {{ user.username }} !</a>
+            <a href="{% url 'profile' user.id %}" style = "color: white; margin-left: +250px;">Hi, {{ user.username }} !</a>
           </div>
           {% else %}
           {% endif %}

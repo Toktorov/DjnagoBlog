@@ -21,7 +21,7 @@ def signup(request):
                 profile = Profile.objects.create(user=user, nickname=nickname, image=image)
                 user = authenticate(username=username, password=password1)
                 login(request, user)
-                return redirect('data')
+                return redirect('index')
             except:
                 messages.error(request, 'Not correct some value')
         else:
@@ -37,7 +37,7 @@ def login_user(request):
             user = User.objects.get(username=username)
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect('data')
+            return redirect('index')
         except:
             messages.error(request, 'Not correct login or password')
     return render(request, 'account/login.html')
