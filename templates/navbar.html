@@ -14,7 +14,6 @@
                     <div>
                       <a class="nav-link active" aria-current="page" href="{% url 'create' %}">Create</a>     
                     </div>
-                    <p>Welcome, {{ user.username }} !</p>
                     <div>                       
                         <a href="{% url 'logout' %}" class="btn btn-danger">Log out</a>
                     </div>
@@ -34,6 +33,12 @@
               <button class="btn btn-outline-success" name = "key_word" type="submit">Search</button>
             </form>
         </ul>
+          {% if user.is_authenticated %}
+          <div>
+            <a style = "color: white; margin-left: +250px;">Hi, {{ user.username }} !</a>
+          </div>
+          {% else %}
+          {% endif %}
       </div>
     </div>
   </nav>

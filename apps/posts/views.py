@@ -31,9 +31,14 @@ def create(request):
         if form.is_valid():
             post = Post()
             post.user = request.user
+            post.title = form.cleaned_data['title']
             post.description = form.cleaned_data['description']
             post.save()
+            formset = PostImageFormSet(request.POST, request.FILES, instance=post)
+            if formset.is_valid():
+                formset.save()
             return redirect('index')
+    formset = PostImageFormSet()
     return render(request, 'posts/create.html', locals())
 
 def update(request, id):

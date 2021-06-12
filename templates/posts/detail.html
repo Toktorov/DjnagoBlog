@@ -1,6 +1,14 @@
 {% extends 'index.html' %}
 {% block content %}
-    
+    <div class="carousel-inner">
+        {% for image in post.post_image.all %}
+            <div>
+                    <img src="{{ image.image.url }}"
+                    class="d-block w-100" alt="..." style="height: 70%; width: 70%;">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
     <div class="container">
         <div class="row">
             <h3 class="card-title">{{ posts.title }}</h3>
