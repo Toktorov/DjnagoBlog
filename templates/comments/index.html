@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block content %}
+    {% for comment in comments %}
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ comment.text }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-group mb-3" role="group" aria-label="Basic outlined example">
+            <a class="mr-3" href="{% url 'update_comment' comment.id %}">
+                <button type="button" class="btn btn-outline-success">Update</button>
+            </a>
+            <a href="{% url 'delete_comment' comment.id %}">
+                <button type="button" class="btn btn-outline-danger">Delete</button>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock %}
