@@ -43,5 +43,5 @@ def login_user(request):
     return render(request, 'account/login.html')
 
 def profile(request, id):
-    profiles = Profile.objects.get(id=id)
-    return render(request, 'profile.html', {"profile": profile})
+    profile = User.objects.get(id=id)
+    return render(request, 'profile.html', {'profile': profile})
