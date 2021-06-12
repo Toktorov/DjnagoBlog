@@ -22,5 +22,10 @@ class PostImage(models.Model):
         verbose_name='Картинки'
     )
 
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes_user')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes_post')
+
+
     def __str__(self):
         return f"{self.id}"

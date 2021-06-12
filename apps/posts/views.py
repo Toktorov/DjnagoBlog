@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from apps.posts.models import Post, PostImage
+from apps.posts.models import Post, PostImage, Like
 from apps.posts.forms import PostForm, PostImageForm
 from django.forms import inlineformset_factory
 from django.contrib.auth.models import User
@@ -14,10 +14,15 @@ def index(request):
                                     Q(description__icontains=key))
     return render(request, 'posts/index.html', {'posts': posts})
 
-def detail(request, id):
+def detail(request, id=id):
     posts = Post.objects.get(id=id)
-    return render(request, 'posts/detail.html', {'posts': posts})
-
+    if 'like' in request.POST:
+        try:
+            like = Like.objects.get(user=request.user, post=posts)
+            like.delete()
+        except:
+            Like.objects.create(user=request.user, post=posts)
+    return render(request, 'posts/detail.html', {"posts": posts})
 
 def create(request):
     form = PostForm(request.POST)
