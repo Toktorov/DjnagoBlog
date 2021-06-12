@@ -33,13 +33,13 @@
               <button class="btn btn-outline-success" name = "key_word" type="submit">Search</button>
             </form>
         </ul>
-          {% if user.is_authenticated %}
-          <div>
-            <a href="{% url 'profile' user.id %}" style = "color: white; margin-left: +250px;">Hi, {{ user.username }} !</a>
-          </div>
-          {% else %}
-          {% endif %}
-      </div>
+        {% if user.is_authenticated %}
+        <div>
+          <a href="{% url 'profile' user.id %}" style = "color: white; margin-left: +250px;">Hi, {{ user.username }} !</a>
+        </div>
+        {% else %}
+        {% endif %}
     </div>
-  </nav>
+  </div>
+</nav>
   

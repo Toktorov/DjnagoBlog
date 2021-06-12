@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Profile
+from apps.users.models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 
@@ -43,5 +43,5 @@ def login_user(request):
     return render(request, 'account/login.html')
 
 def profile(request, id):
-    profiles = Profile.objects.get(user__id=id)
-    return render(request, 'posts/profile.html', {"profile": profiles})
+    profiles = Profile.objects.get(id=id)
+    return render(request, 'profile.html', {"profile": profile})
