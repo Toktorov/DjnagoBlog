@@ -25,11 +25,16 @@ def detail(request, id=id):
     return render(request, 'posts/detail.html', {"posts": posts})
 
 def create(request):
-    form = PostForm(request.POST)
-    if form.is_valid():
-        form.save()
-        return redirect('index')
-    return render(request, 'posts/create.html', {'form': form})
+    form = PostForm(request.POST or None)
+    PostImageFormSet = inlineformset_factory(Post, PostImage, form=PostImageForm, extra=1)
+    if request.method == 'POST':
+        if form.is_valid():
+            post = Post()
+            post.user = request.user
+            post.description = form.cleaned_data['description']
+            post.save()
+            return redirect('index')
+    return render(request, 'posts/create.html', locals())
 
 def update(request, id):
     post = Post.objects.get(id=id)
