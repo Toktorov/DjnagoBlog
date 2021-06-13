@@ -4,7 +4,7 @@
         {% for image in posts.post_image.all %}
             <div>
                     <p><img src="{{ image.image.url }}"width="1000" height= "600"
-                    alt="..." style="border: 6px solid #000000; "></p>
+                    alt="..." style="box-shadow: 0 0 10px rgba(0,0,0,10); margin-top: 20px"></p>
                 </a>
             </div>
         {% endfor %}
@@ -19,11 +19,11 @@
         <div class="col">
             <p class="card-text">{{ posts.created }}</p>
         </div>
-        <div class="col">
-            <a class="card-text" href="{% url 'profile' user.id %}">By {{ posts.user }}</a>
-        </div>
         {% if user.is_authenticated %}
         <div>
+            <div class="col">
+                <a class="card-text" href="{% url 'profile' user.id %}">By {{ posts.user }}</a>
+            </div>
             <a href="{% url 'index' %}" class="btn btn-dark" style = "margin-top: 10px">Go back</a>
             <a href="{% url 'update' posts.id %}" class="btn btn-dark" style="margin-left: auto; margin-top: 10px;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -51,6 +51,16 @@
                 </div>
                 <div class="comments-area">
                     <h4>{{ posts.comment.all.count }} Comments</h4>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input type="hidden" name="comment" value="{{ comment.id }}">
+                            <textarea class="form-control mb-10" rows="5" name="text" placeholder="Messege"
+                                      onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
+                                      required=""></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success">Send comment</button>
+                    </form>
                     {% for comment in posts.get_parent %}
                         <div class="comment-list">
                             <div class="single-comment justify-content-between d-flex">
