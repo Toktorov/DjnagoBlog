@@ -16,17 +16,17 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-{% include 'navbar.html' %}
-<div class="container mt-5    d-flex justify-content-center align-items-center">
-    <div class=" " style="display:center; justify-content: center;width:20%; ">
-        {% if user.image %}
-            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
-                 alt="" style="width: 40px;border-radius: 100%;">
-        {% else %}
-            <img src="https://icdn.lenta.ru/images/2021/04/15/14/20210415144216836/square_1024_36291bbdbfc0ce89b6635a2702b07a1c.jpg"
-                 alt="" style="width: 40px;border-radius: 100%;">
-        {% endif %}
-    </div>
+    {% include 'navbar.html' %}
+    <div class="container mt-5    d-flex justify-content-center align-items-center">
+        <div class=" " style="display:center; justify-content: center;width:20%; ">
+            {% if user.image %}
+                <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                     alt="" style="width: 40px;border-radius: 100%;">
+            {% else %}
+                <img src="{{ user.profile.image }}"
+                     alt="" style="width: 40px;border-radius: 100%;">
+            {% endif %}
+        </div>
 
     <div class="">
         <div class="d-flex align-items-center w-100">
