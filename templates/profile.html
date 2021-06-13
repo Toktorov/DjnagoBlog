@@ -40,8 +40,8 @@
         <div>
             <form method="POST">
                 {% csrf_token %}
-                <input type="hidden" name="sub_id" value="{{ sub.id }}">
-                <button type="submit" name = "follow" class="btn btn-primary" value="{{ sub.id }}">Follow</button>
+                <input type="hidden" name="follower_id" value="{{ follower.id }}">
+                <button type="submit" name = "follow" class="btn btn-primary" value="{{ follower.id }}">Follow</button>
             </form>
             <a>{{ user.follow_sub.all.count }} followers</a>
         </div>

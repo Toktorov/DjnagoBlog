@@ -12,9 +12,8 @@ class Profile(models.Model):
         
 
 class Follower(models.Model):
-    client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follow_client')
-    sub = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='follow_sub')
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follow_user')
+    follower = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='follow_follower')
 
     def __str__(self):
         return f"{self.sub.id}"
