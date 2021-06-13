@@ -8,6 +8,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, related_name='reply_comment', null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user} -- {self.post.id}"
