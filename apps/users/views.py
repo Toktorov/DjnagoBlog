@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from apps.users.models import Profile
+from apps.users.models import Profile, Follower
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 
@@ -42,6 +42,17 @@ def login_user(request):
             messages.error(request, 'Not correct login or password')
     return render(request, 'account/login.html')
 
-def profile(request, id):
-    profile = User.objects.get(id=id)
-    return render(request, 'profile.html', {'profile': profile})
+def profile(request, username):
+    user = User.objects.get(username=username)
+    context = {
+       "user": user
+    }
+    if 'follow' in request.POST:
+        id = request.POST.get('sub_id')
+        sub_object = Follower.objects.get(sub_id=id)
+        try:
+            like = Follower.objects.get(client=request.user, sub = sub_object)
+            like.delete()
+        except:
+            Follower.objects.create(client=request.user, sub=sub_object)
+    return render(request, 'profile.html', context)

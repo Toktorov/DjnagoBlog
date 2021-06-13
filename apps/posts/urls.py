@@ -13,7 +13,7 @@ urlpatterns = [
     path('signup/', signup, name='signup'),
     path('logout/', LogoutView.as_view(next_page= None), name='logout'),
     path('login/', login_user, name='login'),
-    path('profile/<int:id>/', profile, name='profile'),
+    path('profile/<username>', profile, name='profile'),
     path('<int:id>/', comment_index, name='comment_index'),
     path('update/<int:id>/', update_comment, name='update_comment'),
     path('delete/<int:id>/', delete_comment, name='delete_comment'),

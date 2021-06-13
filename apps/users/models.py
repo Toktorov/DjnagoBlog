@@ -9,3 +9,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+        
+
+class Follower(models.Model):
+    client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='follow_client')
+    sub = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='follow_sub')
+
+
+    def __str__(self):
+        return f"{self.sub.id}"

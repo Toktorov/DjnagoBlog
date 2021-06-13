@@ -35,19 +35,18 @@
                 <h1 class="m-5">{{ user.username }}</h1>
             </div>
         </div>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="sub_id" value="{{ sub.id }}">
+                <button type="submit" name = "follow" class="btn btn-primary" value="{{ sub.id }}">Follow</button>
+            </form>
+            </i>{{ user.sub_follow.all.count }} follow
+        </div>
+        </div>
 
-        <div class="w-100">
-            <ul class="d-flex pl">
-                <li>
-                    3 Публикации
-                </li>
-                <li>
-                    450000 подписчиков
-                </li>
-                <li>
-                    68 подписок
-                </li>
-            </ul>
+        <div class="ml-3">
+            <a>{{ user.follow_sub.all.count }} follow</a>
         </div>
     </div>
 

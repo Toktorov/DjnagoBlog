@@ -22,7 +22,7 @@
         {% if user.is_authenticated %}
         <div>
             <div class="col">
-                <a class="card-text" href="{% url 'profile' user.id %}">By {{ posts.user }}</a>
+                <a class="card-text" href="{% url 'profile' user.username %}">By {{ posts.user }}</a>
             </div>
             <a href="{% url 'index' %}" class="btn btn-dark" style = "margin-top: 10px">Go back</a>
             <a href="{% url 'update' posts.id %}" class="btn btn-dark" style="margin-left: auto; margin-top: 10px;">

@@ -35,7 +35,7 @@
         </ul>
         {% if user.is_authenticated %}
         <div>
-          <a href="{% url 'profile' user.id %}" style = "color: white; margin-left: +250px;">Welcome {{ user.username }} !</a>
+          <a href="{% url 'profile' user.username %}" style = "color: white; margin-left: +250px;">Welcome {{ user.username }}!</a>
         </div>
         {% else %}
         {% endif %}
