@@ -15,8 +15,9 @@ class Post(models.Model):
         return self.comment.filter(parent__isnull=True)
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ('-created',)
 
+    
 
 class PostImage(models.Model):
     post = models.ForeignKey(

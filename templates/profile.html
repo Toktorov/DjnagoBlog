@@ -19,13 +19,15 @@
     {% include 'navbar.html' %}
     <div class="container mt-5    d-flex justify-content-center align-items-center">
         <div class=" " style="display:center; justify-content: center;width:20%; ">
+            {% for account in user.socialaccount_set.all %}
             {% if user.image %}
-                <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                <img src="{{ account.get_avatar_url }}"
                      alt="" style="width: 40px;border-radius: 100%;">
             {% else %}
-                <img src="{{ user.profile.image }}"
-                     alt="" style="width: 40px;border-radius: 100%;">
+                <img src="{{ user.image.url }}"
+                     alt="" style="width: 40px;border-radius: 100%;">  
             {% endif %}
+            {% endfor %}
         </div>
 
     <div class="">
@@ -41,12 +43,8 @@
                 <input type="hidden" name="sub_id" value="{{ sub.id }}">
                 <button type="submit" name = "follow" class="btn btn-primary" value="{{ sub.id }}">Follow</button>
             </form>
-            </i>{{ user.sub_follow.all.count }} follow
+            <a>{{ user.follow_sub.all.count }} followers</a>
         </div>
-        </div>
-
-        <div class="ml-3">
-            <a>{{ user.follow_sub.all.count }} follow</a>
         </div>
     </div>
 
@@ -55,23 +53,22 @@
 
 <div class="container mt-5">
     <div class="text-center">
-        <h1>Публикации</h1>
+        <h1>Публикации:</h1>
     </div>
-    4
 </div>
 
 <div class="container w-100">
     <div class=" d-flex justify-content-between">
         <div class="mt-5 mb-3">
-            <img src="https://icdn.lenta.ru/images/2021/04/15/14/20210415144216836/square_1024_36291bbdbfc0ce89b6635a2702b07a1c.jpg"
+            <img src="https://devkg.com/i/organizations-fe03c411ac9a8965971956a4600a55a9"
                  alt="" width="300px">
         </div>
         <div class="mt-5 mb-3">
-            <img src="https://icdn.lenta.ru/images/2021/04/15/14/20210415144216836/square_1024_36291bbdbfc0ce89b6635a2702b07a1c.jpg"
+            <img src="https://devkg.com/i/organizations-fe03c411ac9a8965971956a4600a55a9"
                  alt="" width="300px">
         </div>
         <div class="mt-5 mb-3">
-            <img src="https://icdn.lenta.ru/images/2021/04/15/14/20210415144216836/square_1024_36291bbdbfc0ce89b6635a2702b07a1c.jpg"
+            <img src="https://devkg.com/i/organizations-fe03c411ac9a8965971956a4600a55a9"
                  alt="" width="300px">
         </div>
 
