@@ -47,12 +47,4 @@ def profile(request, username):
     context = {
        "user": user
     }
-    if 'follow' in request.POST:
-        id = request.POST.get('sub_id')
-        sub_object = Follower.objects.get(sub_id=id)
-        try:
-            like = Follower.objects.get(client=request.user, sub = sub_object)
-            like.delete()
-        except:
-            Follower.objects.create(client=request.user, sub=sub_object)
     return render(request, 'profile.html', context)

@@ -22,7 +22,7 @@
         {% if user.is_authenticated %}
         <div>
             <div class="col">
-                <a class="card-text" href="{% url 'profile' user.username %}">By {{ posts.user }}</a>
+                <a class="card-text" href="{% url 'profile' posts.user.username %}">By {{ posts.user }}</a>
             </div>
             <a href="{% url 'index' %}" class="btn btn-dark" style = "margin-top: 10px">Go back</a>
             <a href="{% url 'update' posts.id %}" class="btn btn-dark" style="margin-left: auto; margin-top: 10px;">
@@ -73,16 +73,6 @@
                                         <p class="date">{{ comment.comment_created }}</p>
                                         <p class="comment">
                                             {{ comment.text }}
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                <div class="form-group">
-                                                    <input type="hidden" name="comment" value="{{ comment.id }}">
-                                                    <textarea class="form-control mb-10" rows="5" name="text" placeholder="Messege"
-                                                              onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
-                                                              required=""></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-success">Send comment</button>
-                                            </form>
                                         </p>
                                     </div>
                                 </div>
