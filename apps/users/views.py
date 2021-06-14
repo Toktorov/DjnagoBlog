@@ -45,8 +45,10 @@ def login_user(request):
 
 def profile(request, username):
     users = User.objects.get(username=username)
+    follow_status = Follow.objects.filter(following=users, follower=request.user).exists()
     context = {
-       "user": users
+       "user": users,
+       "follow_status" : follow_status
     }
     if 'follow' in request.POST:
             try:
