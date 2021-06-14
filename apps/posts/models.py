@@ -15,7 +15,7 @@ class Post(models.Model):
         return self.comment.filter(parent__isnull=True)
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ('-created', '-id')
 
     
 
@@ -37,3 +37,7 @@ class Like(models.Model):
 
     def __str__(self):
         return f"{self.id}"
+
+class Follow(models.Model):
+	follower = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='follower')
+	following = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='following')

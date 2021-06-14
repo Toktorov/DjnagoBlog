@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from apps.users.models import Profile, Follower
+from apps.users.models import Profile
+from apps.posts.models import Follow
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 
@@ -43,8 +44,14 @@ def login_user(request):
     return render(request, 'account/login.html')
 
 def profile(request, username):
-    user = User.objects.get(username=username)
+    users = User.objects.get(username=username)
     context = {
-       "user": user
+       "user": users
     }
+    if 'follow' in request.POST:
+            try:
+                follow = Follow.objects.get(follower=request.user, following=users)
+                follow.delete()
+            except:
+                Follow.objects.create(follower=request.user, following=users)
     return render(request, 'profile.html', context)
