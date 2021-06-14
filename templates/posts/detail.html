@@ -69,7 +69,7 @@
                                         <img src="img/blog/c1.jpg" alt="">
                                     </div>
                                     <div class="desc">
-                                        <h5><a href="#">{{ comment.user }}</a></h5>
+                                        <a class="card-text" href="{% url 'profile' posts.user.username %}">By {{ comment.user }}</a>
                                         <p class="date">{{ comment.comment_created }}</p>
                                         <p class="comment">
                                             {{ comment.text }}
@@ -81,13 +81,13 @@
             {% else %}
                     {% for comment in posts.get_parent %}
                         <div class="comment-list">
+                            <div class="col">
+                                <a class="card-text" href="{% url 'profile' posts.user.username %}">By {{ posts.user }}</a>
+                            </div>
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="img/blog/c1.jpg" alt="">
-                                    </div>
                                     <div class="desc">
-                                        <h5><a href="#">{{ comment.user }}</a></h5>
+                                        <h5><a href="{% url 'profile' comment.user.username %}">{{ comment.user }}</a></h5>
                                         <p class="date">{{ comment.comment_created }}</p>
                                         <p class="comment">
                                             {{ comment.text }}
