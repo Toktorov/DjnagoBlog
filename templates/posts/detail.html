@@ -3,7 +3,7 @@
     <div>
         {% for image in posts.post_image.all %}
             <div>
-                    <p><img src="{{ image.image.url }}"width="1000" height= "600"
+                    <p><img src="{{ image.image.url }}"width="900" height= "600"
                     alt="..." style="box-shadow: 0 0 10px rgba(0,0,0,10); margin-top: 20px"></p>
                 </a>
             </div>
@@ -17,12 +17,12 @@
             <p class="card-text">{{ posts.description }}</p>
         </div>
         <div class="col">
-            <p class="card-text">{{ posts.created }}</p>
+            <p class="card-text" style = "margin-top: 10px">{{ posts.created }}</p>
         </div>
         {% if user.is_authenticated %}
         <div>
             <div class="col">
-                <a class="card-text" href="{% url 'profile' posts.user.username %}">By {{ posts.user.username }}</a>
+                <a class="btn btn-light" style = "margin-top: 10px;" href="{% url 'profile' posts.user.username %}">By {{ posts.user.username }}</a>
             </div>
             <a href="{% url 'index' %}" class="btn btn-dark" style = "margin-top: 10px">Go back</a>
             {% if posts.user.username %}
@@ -62,7 +62,7 @@
                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
                                       required=""></textarea>
                         </div>
-                        <button type="submit" class="btn btn-success">Send comment</button>
+                        <button type="submit" class="btn btn-outline-success">Send comment</button>
                     </form>
                     {% for comment in posts.get_parent %}
                         <div class="comment-list">
@@ -72,11 +72,9 @@
                                         <img src="img/blog/c1.jpg" alt="">
                                     </div>
                                     <div class="desc">
-                                        <a class="card-text" href="{% url 'profile' posts.user.username %}">By {{ comment.user }}</a>   
+                                        <a class="btn btn-outline-primary" style="margin-top: 10px" href="{% url 'profile' posts.user.username %}">By {{ comment.user }}</a>  
+                                        <p class="comment" style="margin-top: 10px">{{ comment.text }}</p>
                                         <p class="date">{{ comment.comment_created }}</p>
-                                        <p class="comment">
-                                            {{ comment.text }}
-                                        </p>
                                     </div>
                                 </div>
                             </div>

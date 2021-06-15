@@ -16,25 +16,27 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% include 'include/profile_navbar.html' %}
     <div class="container mt-5    d-flex justify-content-center align-items-center">
         <div class=" " style="display:center; justify-content: center;width:20%; ">
             {% for account in user.socialaccount_set.all %}
-            {% if user.image %}
+            {% for image in user.profile.all %}
+            {% if profile.image %}
                 <img src="{{ account.get_avatar_url }}"
                      alt="" style="width: 40px;border-radius: 100%;">
             {% else %}
-                <img src="{{ user.image.url }}"
+                <img src="{{ profile.image.url }}"
                      alt="" style="width: 40px;border-radius: 100%;">  
             {% endif %}
+            {% endfor %}
             {% endfor %}
         </div>
 
     <div class="">
         <div class="d-flex align-items-center w-100">
             <div>
-                <h1 class="m-5">{{ user.socialaccount_set.all.0.extra_data.name }}</h1>
-                <h1 class="m-5">{{ user.username }}</h1>
+                <h1 class="m-5" style = "margin-left: +100px">{{ user.socialaccount_set.all.0.extra_data.name }}</h1>
+                <h1 style = "margin-left: +100px" class="m-5" >{{ user.username }}</h1>
             </div>
         </div>
         <div>
@@ -45,7 +47,7 @@
                 <input type="hidden" name="follow">
                 <button type="submit" class="btn btn-primary">Follow</button>
             </form>
-        {% else %}
+        {% elif follow_status == False %}
             <form method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="follow">
@@ -54,7 +56,7 @@
         {% endif %}
     </div>
     {% endif %}
-        <div>
+        <div></div>
             <a>{{ user.following.all.count }} followers</a>
         </div>
     </div>
