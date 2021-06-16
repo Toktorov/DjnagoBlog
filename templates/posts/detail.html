@@ -37,6 +37,7 @@
             {% else %}
             {% endif %}
             </a>
+            {% if user.is_authenticated %}
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" name="like">
@@ -48,11 +49,14 @@
                     </svg>
                 </button>
             </form>
+            {% else %}
+            {% endif %}
                 <div class="ml-3">
                     <a>{{ posts.likes_post.all.count }} people like this</a>
                 </div>
                 <div class="comments-area">
                     <h4>{{ posts.comment.all.count }} Comments</h4>
+                    {% if user.is_authenticated %}
                     <form method="post">
                         {% csrf_token %}
                         <div class="form-group">
@@ -63,6 +67,8 @@
                         </div>
                         <button type="submit" class="btn btn-outline-success">Send comment</button>
                     </form>
+                    {% else %}
+                    {% endif %}
                     {% for comment in posts.get_parent %}
                         <div class="comment-list">
                             <div class="single-comment justify-content-between d-flex">

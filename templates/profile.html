@@ -16,20 +16,17 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+{% if user.is_authenticated %}
     {% include 'include/profile_navbar.html' %}
     <div class="container mt-5    d-flex justify-content-center align-items-center">
         <div class=" " style="display:center; justify-content: center;width:20%; ">
-            {% for account in user.socialaccount_set.all %}
-            {% for image in user.profile.all %}
-            {% if profile.image %}
-                <img src="{{ account.get_avatar_url }}"
+            {% if user.image %}
+            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
                      alt="" style="width: 40px;border-radius: 100%;">
             {% else %}
                 <img src="{{ profile.image.url }}"
                      alt="" style="width: 40px;border-radius: 100%;">  
             {% endif %}
-            {% endfor %}
-            {% endfor %}
         </div>
 
     <div class="">
@@ -90,6 +87,9 @@
         crossorigin="anonymous"></script>
 
     </div>
+{% else %}
+    <h4 style="color: red">Login user or Register to see profile</h4>
+{% endif %}
 </div>
 
 

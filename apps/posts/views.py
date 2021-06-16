@@ -51,17 +51,17 @@ def create(request):
     return render(request, 'posts/create.html', locals())
 
 def update(request, id):
-    post = Post.objects.get(id=id)
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            post.title = form.cleaned_data['title']
-            post.description = form.cleaned_data['description']
-            post.save()
-            return redirect('index')
-    else:
-        form = PostForm()
-    return render(request, 'posts/update.html', {'form': form})
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        file = request.FILES.get('file')
+        post_update = Post.objects.get(id=id)
+        post_update.title = title
+        post_update.description = description
+        post_update.image = file
+        post_update.save()
+        return redirect('index')
+    return render(request, 'posts/update.html')
 
 def delete(request, id):
     if request.method == 'POST':
